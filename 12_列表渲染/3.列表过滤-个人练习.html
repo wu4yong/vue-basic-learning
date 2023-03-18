@@ -46,11 +46,28 @@
             //         }
             //     }
             // }
+
+            // 过滤
+            // computed: {
+            //     filePersons() {
+            //         return this.persons.filter((p) => {
+            //             return p.name.indexOf(this.keyWord) !== -1
+            //         })
+            //     }
+            // },
+            // 排序
             computed: {
                 filePersons() {
-                    return this.persons.filter((p) => {
+                    const result = this.persons.filter((p) => {
                         return p.name.indexOf(this.keyWord) !== -1
                     })
+                    if (this.sortType) {
+                        result.sort((a, b) => {
+                            return this.sortType == 1 ? b.age - a.age : a.age - b.age
+                        })
+                    }
+
+                    return result
                 }
             },
         })
